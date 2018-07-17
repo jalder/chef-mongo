@@ -12,6 +12,7 @@ end
 bash 'bootstrap' do
   code <<-EOH
 
+    cd /usr/local/src
     #todo: make this a variable
     tar -xvzf mongodb-bi-linux-x86_64-rhel70-v2.6.0-beta1.tgz
     install -m755 mongodb-bi-linux-x86_64-rhel70-v2.6.0-beta1/bin/mongo* /usr/local/bin/
