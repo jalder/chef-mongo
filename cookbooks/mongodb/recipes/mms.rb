@@ -1,3 +1,16 @@
+yum_package 'mongodb-mms' do
+  action :upgrade
+  allow_downgrade true
+  source '/usr/local/src/mongodb-mms-3.6.7.47243.20180606T1452Z-1.x86_64.rpm' #todo: make this a variable
+end
+
+yum_package 'mongodb-mms-automation-agent-manager' do
+  action :upgrade
+  allow_downgrade true
+  source '/usr/local/src/mongodb-mms-automation-agent-manager-4.5.15.5279-1.x86_64.rhel7.rpm' #todo: make this a variable
+end
+
+
 bash 'bootstrap' do
   code <<-EOH
 
@@ -11,8 +24,6 @@ bash 'bootstrap' do
     #todo: initial ops manager SMTP settings
     #todo: initial target test replica set
     #todo: automation agent install recipes
-
-    yum install -y --quiet /usr/local/src/mongodb-mms-*.rpm #todo: detect if already installed and skip
 
     EOH
 end
