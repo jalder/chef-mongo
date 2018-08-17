@@ -9,6 +9,8 @@ template '/etc/selinux/config' do
   mode '0644'
 end
 
+#todo: most of this should be moved to a tarball install specific recipe (as opposed to yum recipe, both should be usable)
+
 user 'mongod' do
   action :create
   shell '/bin/bash'
