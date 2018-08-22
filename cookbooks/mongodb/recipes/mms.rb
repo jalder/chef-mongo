@@ -1,15 +1,22 @@
+remote_file '/usr/local/src/mongodb-mms.rpm' do
+  source 'https://downloads.mongodb.com/on-prem-mms/rpm/mongodb-mms-4.0.1.50101.20180801T1117Z-1.x86_64.rpm' #todo: make this a variable
+  owner 'root'
+  group 'root'
+  mode '0644'
+  action :create_if_missing
+end
+
 yum_package 'mongodb-mms' do
-  action :upgrade
-  allow_downgrade true
-  source '/usr/local/src/mongodb-mms-3.6.7.47243.20180606T1452Z-1.x86_64.rpm' #todo: make this a variable
+  action :install
+  source '/usr/local/src/mongodb-mms.rpm'
 end
 
-yum_package 'mongodb-mms-automation-agent-manager' do
-  action :upgrade
-  allow_downgrade true
-  source '/usr/local/src/mongodb-mms-automation-agent-manager-4.5.15.5279-1.x86_64.rhel7.rpm' #todo: make this a variable
-end
-
+#todo: move automation agent to own recipe
+#yum_package 'mongodb-mms-automation-agent-manager' do
+#  action :upgrade
+#  allow_downgrade true
+#  source '/usr/local/src/mongodb-mms-automation-agent-manager-4.5.15.5279-1.x86_64.rhel7.rpm' #todo: make this a variable
+#end
 
 bash 'bootstrap' do
   code <<-EOH
@@ -28,6 +35,7 @@ bash 'bootstrap' do
     EOH
 end
 
+#todo: need to configure appdb backing database first before starting
 #todo: action :enable is breaking with error Failed to execute operation: Too many levels of symbolic links - fix this
 service 'mongodb-mms' do
   action [ :start ]

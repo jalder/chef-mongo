@@ -48,15 +48,15 @@ end
 bash 'bootstrap' do
   code <<-EOH
 
-    setenforce 0
-    yum update -y #todo: more elegant cross-distro needed here
+#    setenforce 0
+#    yum update -y #todo: more elegant cross-distro needed here
 
-    cd /usr/local/src/
-    if \[ ! -f /usr/local/src/mongodb.tgz \]; then
-      curl -o mongodb.tgz https://downloads.mongodb.com/linux/mongodb-linux-x86_64-enterprise-rhel70-3.6.5.tgz #todo: make this a variable
-    fi
-    tar xvf mongodb.tgz
-    rsync -a /usr/local/src/mongodb-linux-x86_64-enterprise-rhel70-3.6.5/bin/ /usr/local/bin/ #todo: continue working with variable
+#    cd /usr/local/src/
+#    if \[ ! -f /usr/local/src/mongodb.tgz \]; then
+#      curl -o mongodb.tgz https://downloads.mongodb.com/linux/mongodb-linux-x86_64-enterprise-rhel70-3.6.5.tgz #todo: make this a variable
+#    fi
+#    tar xvf mongodb.tgz
+#    rsync -a /usr/local/src/mongodb-linux-x86_64-enterprise-rhel70-3.6.5/bin/ /usr/local/bin/ #todo: continue working with variable
 
     EOH
 end
